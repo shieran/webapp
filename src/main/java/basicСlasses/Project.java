@@ -1,13 +1,18 @@
 package basicСlasses;
 
 public class Project {
+    private static int projectCount = 1;
     private String name;
     private String logoUrl;
     private String startDate;
     private String endDate;
     private String manHours;
     private int id;
-    private static int projectCount = 1;
+
+    public Project() {
+        this.id = projectCount;
+        projectCount++;
+    }
 
     public Project(String name, String logoUrl, String startDate, String endDate, String manHours) {
         this.name = name;
@@ -65,5 +70,17 @@ public class Project {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "name='" + name + '\'' +
+                ", logoUrl='" + logoUrl + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", manHours='" + manHours + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

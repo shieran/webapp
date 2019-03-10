@@ -1,34 +1,35 @@
 package services;
 
-import basicСlasses.Company;
-import basicСlasses.Employee;
-import basicСlasses.Project;
 import packDAO.CompanyDAO;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 @Path("/company")
 public class CompanyService {
-    public static void addEmployee(Employee employee, Company company){
-        company.addEmpoleesToCompany(employee);
-    }
-
-    public static void addProject(Project project, Company company){
-        company.addProjectToCompany(project);
-    }
-
-    @POST
-    public static void add(String json){
-        CompanyDAO.createAndSave(json);
-    }
 
     @GET
-    public static String find(int id){
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String find(@PathParam("id") int id){
         return CompanyDAO.findById(id);
     }
 
+    @GET
+    public String getAll(){
+        return CompanyDAO.getAllCompany();
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public void add(String json){
+        CompanyDAO.createAndSave(json);
+    }
+
     @DELETE
-    public static void delete(int id){
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void delete(@PathParam("id") int id){
         CompanyDAO.delete(id);
     }
 

@@ -1,7 +1,5 @@
 package services;
 
-import basicСlasses.Employee;
-import basicСlasses.Project;
 import packDAO.EmployeeDAO;
 
 import javax.ws.rs.*;
@@ -9,20 +7,22 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/employees")
 public class EmployeeService {
-    public void assignToProject(Employee employee, Project project) {
-        employee.addProjectToEmployee(project);
-    }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public static String find(@PathParam("id") int id) {
+    public String find(@PathParam("id") int id) {
         return EmployeeDAO.findById(id);
     }
 
+    @GET
+    public String getAll(){
+        return EmployeeDAO.getAllEmployee();
+    }
 
     @POST
-    public static String save(String json) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public String save(String json) {
         EmployeeDAO.employeeCreationAndSave(json);
         return "employee was saved";
     }

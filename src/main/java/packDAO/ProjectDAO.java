@@ -13,6 +13,15 @@ import java.util.LinkedList;
 public class ProjectDAO {
     private static LinkedList<Project> projects = new LinkedList<>();
 
+    static {
+        Project project = new Project("hydra", "logoUrl", "22.12.2005", "noEndForThisMoment", "120");
+        projects.add(project);
+    }
+
+    public static String getAllProjects(){
+        return objectToJson(projects);
+    }
+
     public static void projectCreation(String json) {
         Project project = new Gson().fromJson(json, Project.class);
         projects.add(project);
@@ -30,11 +39,11 @@ public class ProjectDAO {
         return "no project with that id";
     }
 
-    private static String objectToJson(Project project) {
+    private static String objectToJson(Object object) {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json = null;
         try {
-            json = ow.writeValueAsString(project);
+            json = ow.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

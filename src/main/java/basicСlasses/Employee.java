@@ -6,24 +6,24 @@ import java.util.List;
 
 public class Employee {
 
-
+    private static int countOfEmployee = 1;
     private String photoUrl;
     private String name;
     private String email;
     private int id;
     private List<Project> projectsOfEmployee = new LinkedList<>();
-    private static int countOfEmployee = 1;
 
     public Employee() {
+        this.id = countOfEmployee;
         countOfEmployee++;
     }
 
-    public Employee(String photoUrl, String name, String email, List<Project> projectsOfEmployee) {
+    public Employee(String photoUrl, String name, String email) {
         this.photoUrl = photoUrl;
         this.name = name;
         this.email = email;
         this.id = countOfEmployee;
-        this.projectsOfEmployee = projectsOfEmployee;
+        this.projectsOfEmployee = new LinkedList<>();
         countOfEmployee++;
     }
 

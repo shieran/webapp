@@ -3,17 +3,25 @@ package basicСlasses;
 import java.util.LinkedList;
 
 public class Company {
+    private static int countOfCompany = 1;
     private String name;
     private String logoUrl;
     private int id;
     private LinkedList<Employee> employees = new LinkedList<>();
     private LinkedList<Project> projectsOfCompany = new LinkedList<>();
-    private static int countOfCompany = 1;
+
+
+    public Company() {
+        this.id = countOfCompany;
+        countOfCompany++;
+    }
 
     public Company(String name, String logoUrl) {
         this.name = name;
         this.logoUrl = logoUrl;
         this.id = countOfCompany;
+        this.projectsOfCompany = new LinkedList<>();
+        this.employees = new LinkedList<>();
         countOfCompany++;
     }
 

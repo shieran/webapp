@@ -1,28 +1,35 @@
 package services;
 
-import basicСlasses.Project;
 import packDAO.LogsDAO;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 @Path("/logs")
 public class LogsService {
 
     @POST
-    public static void addLog(String json){
+    @Produces(MediaType.APPLICATION_JSON)
+    public void addLog(String json){
         LogsDAO.addLogAndSave(json);
     }
 
     @GET
-    public static String findLog(Project project){
-        return LogsDAO.findLog(project);
+    @Path("/{projectName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String findLog(@PathParam("projectName") String projectName){
+        return LogsDAO.findLog(projectName);
+    }
+
+    @GET
+    public String getAll(){
+        return LogsDAO.getAllLogs();
     }
 
     @DELETE
-    public static void deleteLog(Project project){
-        LogsDAO.deleteLog(project);
+    @Path("/{projectName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void deleteLog(@PathParam("projectName") String projectName){
+        LogsDAO.deleteLog(projectName);
     }
 }

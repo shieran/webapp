@@ -12,6 +12,15 @@ import java.util.LinkedList;
 public class CompanyDAO {
     private static LinkedList<Company> companies = new LinkedList<>();
 
+    public static String getAllCompany(){
+        return objectToJson(companies);
+    }
+
+    static {
+        Company company = new Company("microsoft","logoUrl");
+        companies.add(company);
+    }
+
     public static void createAndSave(String json){
         Company company = new Gson().fromJson(json, Company.class);
         companies.add(company);
@@ -22,18 +31,18 @@ public class CompanyDAO {
         Company company;
         while (iterator.hasNext()) {
             company = iterator.next();
-            if (iterator.next().getId() == id){
+            if (company.getId() == id){
                 return objectToJson(company);
             }
         }
         return "no company with that id";
     }
 
-    private static String objectToJson(Company company){
+    private static String objectToJson(Object object) {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json = null;
         try {
-            json = ow.writeValueAsString(company);
+            json = ow.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

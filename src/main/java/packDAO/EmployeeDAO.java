@@ -1,7 +1,6 @@
 package packDAO;
 
 import basicСlasses.Employee;
-import basicСlasses.Project;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -14,11 +13,14 @@ public class EmployeeDAO {
 
     private static LinkedList<Employee> employees = new LinkedList<>();
 
-    static {
-        Employee employee = new Employee("photoUrl", "Kiryl", "mail", new LinkedList<Project>());
-        employees.add(employee);
+    public static String getAllEmployee(){
+        return objectToJson(employees);
     }
 
+    static {
+        Employee employee = new Employee("photoUrl", "Kiryl", "mail");
+        employees.add(employee);
+    }
 
     public static void employeeCreationAndSave(String json) {
         Employee employee = new Gson().fromJson(json, Employee.class);
@@ -37,11 +39,11 @@ public class EmployeeDAO {
         return "no employee with that id";
     }
 
-    private static String objectToJson(Employee employee) {
+    private static String objectToJson(Object object) {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json = null;
         try {
-            json = ow.writeValueAsString(employee);
+            json = ow.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

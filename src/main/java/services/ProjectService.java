@@ -2,26 +2,34 @@ package services;
 
 import packDAO.ProjectDAO;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 @Path("/project")
 public class ProjectService {
 
     @GET
-    public String getProject(int id){
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getProject(@PathParam("id") int id){
        return ProjectDAO.findById(id);
     }
 
+    @GET
+    public String getAll(){
+        return ProjectDAO.getAllProjects();
+    }
+
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
     public void addProject(String json){
         ProjectDAO.projectCreation(json);
     }
 
     @DELETE
-    public void deleteProject(int id){
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void deleteProject(@PathParam("id") int id){
         ProjectDAO.deleteProject(id);
     }
 

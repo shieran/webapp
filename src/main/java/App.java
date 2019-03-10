@@ -1,6 +1,3 @@
-import basicСlasses.Employee;
-import services.EmployeeService;
-
 public class App {
     public static void main(String[] args) {
         // tomcut object
@@ -16,6 +13,5 @@ public class App {
 
 
         // 2))maven tomcat plugin
-
     }
 }

@@ -3,37 +3,39 @@ package basicСlasses;
 import java.util.Date;
 
 public class Logs {
-    private Employee employee;
-    private Project project;
+    private String employeeName;
+    private String projectName;
     private int timeSec;
     private String comment;
     private Date date;
 
-    public Logs(Employee employee, Project project, int timeSec, String comment) {
-        this.employee = employee;
-        this.project = project;
+    public Logs() {
+        this.date = new Date();
+    }
+
+    public Logs(String employee, String project, int timeSec, String comment) {
+        this.employeeName = employee;
+        this.projectName = project;
         this.timeSec = timeSec;
         this.comment = comment;
         this.date = new Date();
     }
 
-
-    public Employee getEmployee() {
-        return employee;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
-    public Project getProject() {
-        return project;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
-
 
     public int getTimeSec() {
         return timeSec;
@@ -59,12 +61,16 @@ public class Logs {
         this.date = date;
     }
 
-
-    public static Employee getEmployeeFromLog(Logs log){
-        return log.employee;
+    @Override
+    public String toString() {
+        return "Logs{" +
+                "employeeName='" + employeeName + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", timeSec=" + timeSec +
+                ", comment='" + comment + '\'' +
+                ", date=" + date +
+                '}';
     }
 
-    public static Project getProjectFromLog(Logs log){
-        return log.project;
-    }
+
 }
