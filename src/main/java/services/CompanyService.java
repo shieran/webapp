@@ -1,5 +1,6 @@
 package services;
 
+import org.apache.log4j.Logger;
 import packDAO.CompanyDAO;
 
 import javax.ws.rs.*;
@@ -7,6 +8,8 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/company")
 public class CompanyService {
+
+    private static final Logger log = Logger.getLogger(CompanyService.class);
 
     @GET
     @Path("/{id}")
@@ -17,6 +20,7 @@ public class CompanyService {
 
     @GET
     public String getAll(){
+        log.info("get method called");
         return CompanyDAO.getAllCompany();
     }
 
